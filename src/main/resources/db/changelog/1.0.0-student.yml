@@ -1,0 +1,29 @@
+databaseChangeLog:
+    - changeSet:
+        id:  1.0.0.students-table
+        author:  Mothusi Molorane
+        changes:
+           - createTable:
+                tableName:  students
+                columns:
+                    - column:
+                        name:  id
+                        type:  INT
+                        autoIncrement: true
+                        constraints:
+                            primaryKey: true
+                    - column:
+                        name: name
+                        type: varchar(50)
+                        constraints:
+                           nullable: false
+                    - column:
+                        name: email
+                        type: varchar(50)
+                        constraints:
+                           nullable: false
+                    - column:
+                        name: age
+                        type: INT
+                        constraints:
+                           nullable: false

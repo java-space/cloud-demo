@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    username: root
+    password: blessing
+    url: jdbc:mysql://localhost:2520/cloud-prod?serverTimezone=UTC&createDatabaseIfNotExist=true

@@ -1,0 +1,12 @@
+databaseChangeLog:
+    - changeSet:
+        id: 2.0.0.load-students
+        author: Mothusi Molorane
+        changes:
+            - loadData:
+                encoding: UTF-8
+                file: ../data/students/data.csv
+                relativeToChangelogFile: true
+                separator: ','
+                tableName: students
+                usePreparedStatements: true

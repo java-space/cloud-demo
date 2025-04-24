@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Student API
+  version: 1.0.0
+  description: A simple API for managing students
+
+tags:
+  - name: Student
+    description: API operations for students
+
+paths:
+  /students:
+    get:
+      tags:
+        - Student
+      summary: Get all students
+      operationId: getAllStudents
+      responses:
+        '200':
+          description: A list of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+
+    post:
+      tags:
+        - Student
+      summary: Create a new student
+      operationId: createStudent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentInput'
+      responses:
+        '201':
+          description: Student created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+
+  /students/{id}:
+    get:
+      tags:
+        - Student
+      summary: Get a student by ID
+      operationId: getStudentById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found
+
+    put:
+      tags:
+        - Student
+      summary: Update a student
+      operationId: updateStudent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentInput'
+      responses:
+        '200':
+          description: Student updated successfully
+        '204':
+          description: No Content
+        '404':
+          description: Student not found
+          content:
+            application/json:
+              schema:
+                type: string
+            '*/*':
+              schema:
+                type: string
+
+    delete:
+      tags:
+        - Student
+      summary: Delete a student
+      operationId: deleteStudent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Student deleted successfully
+        '404':
+          description: Student not found
+
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        age:
+          type: integer
+          example: 20
+
+    StudentInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        age:
+          type: integer
+          example: 20
